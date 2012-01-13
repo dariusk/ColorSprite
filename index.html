@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Color Demo</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+<body>
+
+<div id="container">
+
+ <img id="srcimg" src="sunset.jpg">
+ <canvas id="canvas" width=640 height=480></canvas>
+</div>
+<script src="js/libs/jquery-1.6.2.min.js"></script>
+<script src="js/libs/quantize.js"></script>
+<script src="js/color-thief.js"></script>
+
+
+<script type="text/javascript">
+
+  function putPixel(ctx, pal, x, y) {
+    ctx.fillStyle = "rgb(" + pal[0] + "," + pal[1] + "," + pal[2] + ")";
+    ctx.fillRect(x*16, y*16, 16, 16);
+  }
+
+  $(document).ready( function() { 
+
+    $('#srcimg').load( function() {
+      var pal = createPalette(this,10);
+      console.log(pal);
+      var ctx = $('#canvas')[0].getContext("2d");
+      ctx.fillStyle = "rgb(" + pal[2][0] + "," + pal[2][1] + "," + pal[2][2] + ")";
+      ctx.fillRect(16,16,16*5,16*6);
+      putPixel(ctx, pal[0], 1, 0);
+      putPixel(ctx, pal[0], 5, 0);
+      putPixel(ctx, pal[0], 1, 1);
+
+      putPixel(ctx, pal[1], 7, 0);
+      putPixel(ctx, pal[1], 7, 1);
+      putPixel(ctx, pal[1], 7, 2);
+      putPixel(ctx, pal[1], 7, 3);
+      putPixel(ctx, pal[1], 0, 4);
+      putPixel(ctx, pal[1], 0, 5);
+      putPixel(ctx, pal[1], 0, 6);
+      putPixel(ctx, pal[1], 1, 4);
+      putPixel(ctx, pal[1], 1, 5);
+      putPixel(ctx, pal[1], 1, 6);
+
+      putPixel(ctx, pal[2], 1, 7);
+      putPixel(ctx, pal[2], 5, 7);
+      putPixel(ctx, pal[2], 6, 4);
+      putPixel(ctx, pal[2], 7, 4);
+
+      putPixel(ctx, pal[3], 3, 2);
+      putPixel(ctx, pal[3], 5, 2);
+
+      putPixel(ctx, pal[4], 2, 5);
+      putPixel(ctx, pal[4], 3, 5);
+      putPixel(ctx, pal[4], 5, 5);
+
+      putPixel(ctx, pal[5], 4, 5);
+    });
+
+  });
+</script>
+
+</body>
+</html>
